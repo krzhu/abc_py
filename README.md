@@ -1,11 +1,11 @@
 abc\_py
 --------
-A simple Python interface for logic synthesis framework abc [Github](https://github.com/berkeley-abc/abc).
+A simple Python interface for logic synthesis framework [abc](https://github.com/berkeley-abc/abc).
 
 --------
 # Install
 
-#abc
+# abc
 [abc](https://github.com/berkeley-abc/abc)
 
 abc\_py requires a static library for abc, and to make it shareable. `-fPIC` flag needs to be added to gcc or Clang.
@@ -20,7 +20,7 @@ Then compile the abc
 make libabc.a
 ```
 
-#pybind11
+# pybind11
 [pybind11](https://github.com/pybind/pybind11)
 
 Please see the official [document](http://pybind11.readthedocs.org/en/master) for installing the pybind11.
@@ -39,7 +39,7 @@ The cmake will automatically find the system Python.
 To use the other Python, add cmake flags `cmake -DPYTHON_INCLUDE_DIR=<path> -DPYTHON_LIBRARIES=<static libarary>`.
 For example, `-DPYTHON_INCLUDE_DIR=<path>/include/python3.7m -DPYTHON_LIBRARIES=<path>/lib/libpython3.7m.a`
 
-#Build and Install
+# Build
 ```
 mkdir build
 cd build
@@ -49,11 +49,11 @@ cd ../../
 pip install abc_py
 ```
 --------
-#Usage
+# Usage
 
 `import abc\_py` like the standard Python library.
 
 --------
-#Misc.
+# Misc.
 Keren Zhu, The University of Texas at Austin
 [UTDA](https://www.cerc.utexas.edu/utda/)
