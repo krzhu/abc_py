@@ -28,26 +28,6 @@ unset(CMAKE_INSTALL_PREFIX)
 
 message(STATUS "Install prefix: ${CMAKE_INSTALL_PREFIX}")
 
-# Find the directory for LIMBO. If cache variable LIMBO_DIR is defined, use it as the path to LIMBO, otherwise use the system LIMBO_DIR
-if (LIMBO_DIR)
-    set(LIMBO_ROOT_DIR ${LIMBO_DIR})
-    message(STATUS "Use LIMBO: ${LIMBO_ROOT_DIR}")
-else()
-    set(LIMBO_ROOT_DIR $ENV{LIMBO_DIR})
-    message(STATUS "Use system LIMBO ${LIMBO_ROOT_DIR}")
-endif()
-unset (LIMBO_DIR CACHE)
-
-# Find the directory for sparsehash. If cache variable SPARSEHASH_DIR is defined, use it as the path to SPARSEHASH, otherwise use the system SPARSEHASH_DIR
-if (SPARSEHASH_DIR)
-    set(SPARSEHASH_ROOT_DIR ${SPARSEHASH_DIR})
-    message(STATUS "Use SPARSEHASH: ${SPARSEHASH_ROOT_DIR}")
-else()
-    set(SPARSEHASH_ROOT_DIR $ENV{SPARSE_HASH_DIR})
-    message(STATUS "Use system SPARSEHASH ${SPARSEHASH_ROOT_DIR}")
-endif()
-unset (SPARSEHASH_DIR CACHE)
-
 
 
 # Find the directory for ABC. If cache variable ABC_DIR is defined, use it as the path to ABC, otherwise use the system ABC_DIR
@@ -90,8 +70,6 @@ mark_as_advanced(VERSION_MAJOR VERSION_MINOR VERSION_PATCH)
 
 
 
-                #$ENV{LEMON_INC}
-                #link_directories(${BOOST_LIBRARYDIR})
 file(GLOB SOURCES src/global/*.h    src/global/*.cpp
                   src/interface/*.h      src/interface/*.cpp
                   src/util/*.h      src/util/*.cpp
@@ -118,20 +96,12 @@ unset(PYBIND11_DIR CACHE)
 
 add_subdirectory(${PYBIND11_ROOT_DIR} "./pybind11")
 
-#Google Test
-if (GTEST_DIR)
-    set(GTEST_ROOT_DIR ${GTEST_DIR})
-    message(STATUS "Use google test: ${GTEST_ROOT_DIR}")
-else()
-    set(GTEST_ROOT_DIR $ENV{GTEST_DIR})
-    message(STATUS "Use system google test: ${GTEST_ROOT_DIR}")
-endif()
-unset(GTEST_DIR CACHE)
-
 # Python
+if (NOT PYTHON_INCLUDE_DIR OR NOT PYTHON_LIBRARIES)
 find_package(PythonLibs REQUIRED)
-set(PYTHON_INCLUDE_DIR "/home/local/eda09/keren/libs/python-3.7.5-shared/include/python3.7m")
-set(PYTHON_LIBRARIES "/home/local/eda09/keren/libs/python-3.7.5-shared/lib/libpython3.7m.a")
+endif()
+#set(PYTHON_INCLUDE_DIR "/home/local/eda09/keren/libs/python-3.7.5-shared/include/python3.7m")
+#set(PYTHON_LIBRARIES "/home/local/eda09/keren/libs/python-3.7.5-shared/lib/libpython3.7m.a")
 message(STATUS "python include directory: ${PYTHON_INCLUDE_DIR}")
 message(STATUS "python libraries: ${PYTHON_LIBRARIES}")
 
@@ -164,12 +134,8 @@ set(CMAKE_EXE_LINKER_FLAGS "-pthread -static-libgcc -static-libstdc++ -static")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src
     ${CMAKE_CURRENT_SOURCE_DIR}/unittest
-    ${GTEST_ROOT_DIR}/googletest/include
     ${Boost_INCLUDE_DIR}
     ${ZLIB_INCLUDE_DIRS}
-    ${CAIRO_STATIC_INCLUDE_DIRS}
-    ${LIMBO_ROOT_DIR}/include
-    ${SPARSEHASH_ROOT_DIR}/include
     ${ABC_ROOT_DIR}
     ${ABC_ROOT_DIR}/src
 )
@@ -187,11 +153,8 @@ file(GLOB STATIC_LIB
     )
 
 
-#target_link_libraries(${PROJECT_NAME} ${STATIC_LIB} ${Boost_LIBRARIES} )
 
 # Add modules to pybind
 pybind11_add_module("abc_py" ${PY_API_SOURCES} ${SOURCES})
 target_link_libraries("abc_py" PUBLIC ${STATIC_LIB} ${Boost_LIBRARIES} )
 
-#Install
-#install (TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX_DIR}/bin)
