@@ -1,6 +1,9 @@
 abc\_py
 --------
 A simple Python interface for logic synthesis framework [abc](https://github.com/berkeley-abc/abc).
+You are welcome to cite ` Keren Zhu, Mingjie Liu, Hao Chen, Zheng Zhao and David Z. Pan,"Exploring Logic Optimizations with Reinforcement Learning and Graph Convolutional Network," 2nd ACM/IEEE Workshop on Machine Learning for CAD (MLCAD), Nov. 2020. `
+
+
 
 --------
 # Install
@@ -54,6 +57,8 @@ pip install abc_py
 `import abc\_py` like the standard Python library.
 
 --------
-# Misc.
+# Contact.
 Keren Zhu, The University of Texas at Austin
 [UTDA](https://www.cerc.utexas.edu/utda/)
+
+Please let me know if there is any issue or suggestions. I am also welcome for asking for new features.
