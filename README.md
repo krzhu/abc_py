@@ -12,7 +12,7 @@ You are welcome to cite ` Keren Zhu, Mingjie Liu, Hao Chen, Zheng Zhao and David
 [abc](https://github.com/berkeley-abc/abc)
 
 abc\_py requires a static library for abc, and to make it shareable. `-fPIC` flag needs to be added to gcc or Clang.
-The easiest way is to edit the Makefile of abc and add the flag.
+The easiest way is to edit the Makefile of abc and add the flag. ABC has an option in Makefile to do this, please check their documentations for details. 
 ```
 CC   := gcc -fPIC
 CXX  := g++ -fPIC
@@ -22,6 +22,8 @@ Then compile the abc
 ```
 make libabc.a
 ```
+
+Note that ABC is defining several macros at build. Please check their Makafile and define them too in CMakeLists.txt, otherwise there might be errors when including the headers. 
 
 # pybind11
 [pybind11](https://github.com/pybind/pybind11)
@@ -61,4 +63,4 @@ pip install abc_py
 Keren Zhu, The University of Texas at Austin
 [UTDA](https://www.cerc.utexas.edu/utda/)
 
-Please let me know if there is any issue or suggestions. I am also welcome for asking for new features.
+Please let me know if there is any issue or suggestions.
