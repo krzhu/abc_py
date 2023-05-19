@@ -9,8 +9,8 @@
 #define ABC_PY_ABC_INTERFACE_H_
 
 #include "global/global.h"
-#include <abc_src/base/main/mainInt.h>
-#include <abc_src/base/abc/abc.h>
+#include <src/base/main/mainInt.h>
+#include <src/base/abc/abc.h>
 
 PROJECT_NAMESPACE_BEGIN
 
